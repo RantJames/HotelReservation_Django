@@ -10,6 +10,9 @@ class HotelList(models.Model):
     price = models.IntegerField()
     last_updated = models.DateTimeField(default=timezone.now)
 
+    def __str__(self):
+        return self.name
+
 
 class ReservationDetails(models.Model):
     res_id = models.ForeignKey(HotelList, on_delete=models.CASCADE, primary_key=True)
@@ -18,7 +21,9 @@ class ReservationDetails(models.Model):
     last_updated = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.name
+        return self.res_id
+
+
 
 
 
