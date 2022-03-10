@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework import filters
-from .models import HotelList, ReservationDetails
+from .models import HotelList, ReservationDetails, GuestList
 from rest_framework.decorators import api_view
 
 # Create your views here.
@@ -23,7 +23,8 @@ def hotel_list(request):
 def reservation_list(request):
     context = {
         'hotels': HotelList.objects.all(),
-        'reservationList': ReservationDetails.objects.all()
+        'reservationList': ReservationDetails.objects.all(),
+        'guestList': GuestList.objects.all()
     }
     return render(request, 'Reservation/ReservationList.html', context)
 
@@ -42,4 +43,7 @@ class GetGenericReservationList(generics.ListCreateAPIView):
 
     filter_backends = [filters.SearchFilter]
     search_fields = ['hotel_name']
+
+    # def post(self, request, *args, **kwargs):
+    #     return HttpResponse(f"Booking Confirmed. Your confirmation number : {request.data}")
 

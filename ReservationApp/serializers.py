@@ -1,4 +1,6 @@
-from rest_framework import serializers
+from rest_framework import serializers, status
+from rest_framework.response import Response
+
 from .models import HotelList, ReservationDetails, GuestList
 
 
@@ -20,7 +22,7 @@ class ReservationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ReservationDetails
-        fields = ['hotel_name', 'checkin_date', 'checkout_date', 'guestInReservation']
+        fields = ['hotel_name', 'confirmation_num', 'checkin_date', 'checkout_date', 'guestInReservation']
 
     # def create(self, validated_data):
     #     guests_data = validated_data.pop('guestInReservation')

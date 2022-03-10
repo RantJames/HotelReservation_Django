@@ -15,15 +15,29 @@
 <div class="row">
 
     {%  for reservation in reservationList %}
+<!--    <div class="col-sm-4">-->
+<!--        <div class="card text-center text-white bg-dark mb-3">-->
+<!--            <div class="card-body">-->
+<!--                <h5 class="card-title">Name: {{reservation.hotel_name}}</h5>-->
+<!--                <h6 class="card-subtitle mb-2">Checkin Date: {{reservation.checkin_date}}</h6>-->
+<!--                <h6 class="card-subtitle mb-2">Checkout Date: {{reservation.checkout_date}}</h6>-->
+<!--&lt;!&ndash;                <h7 class="card-subtitle mb-2">Guest Name: {{guest.first_name}}</h7>                &ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    {% for guest in guestList %}
+    {% if guest.res_id
     <div class="col-sm-4">
         <div class="card text-center text-white bg-dark mb-3">
             <div class="card-body">
                 <h5 class="card-title">Name: {{reservation.hotel_name}}</h5>
                 <h6 class="card-subtitle mb-2">Checkin Date: {{reservation.checkin_date}}</h6>
                 <h6 class="card-subtitle mb-2">Checkout Date: {{reservation.checkout_date}}</h6>
+                <h7 class="card-subtitle mb-2">Guest Name: {{guest.first_name}}</h7>
             </div>
         </div>
     </div>
+    {% endfor %}
     {% endfor %}
 
 </div>

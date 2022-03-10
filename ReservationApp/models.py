@@ -15,10 +15,20 @@ class HotelList(models.Model):
 
 
 class ReservationDetails(models.Model):
+    confirmation_num = models.IntegerField(default=1000)
     hotel_name = models.ForeignKey(HotelList, on_delete=models.CASCADE)
     checkin_date = models.DateField()
     checkout_date = models.DateField()
     last_updated = models.DateTimeField(default=timezone.now)
+
+    def save(self, *args, **kwargs):
+        # This means that the model isn't saved to the database yet
+        if self._state.adding:
+            last_id = ReservationDetails.objects.all().aggregate(largest=models.Max('confirmation_num'))['largest']
+            if last_id is not None:
+                self.confirmation_num = last_id + 1
+
+        super(ReservationDetails, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.hotel_name
