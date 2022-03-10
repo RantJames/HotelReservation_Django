@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from rest_framework import generics
+from rest_framework import filters
 from .models import HotelList, ReservationDetails
+from rest_framework.decorators import api_view
+
 # Create your views here.
+from .serializers import HotelSerializer, ReservationSerializer
 
 
 def health_check(request):
@@ -21,3 +26,20 @@ def reservation_list(request):
         'reservationList': ReservationDetails.objects.all()
     }
     return render(request, 'Reservation/ReservationList.html', context)
+
+
+class GetGenericHotelList(generics.ListCreateAPIView):
+    queryset = HotelList.objects.all()
+    serializer_class = HotelSerializer
+
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'address']
+
+
+class GetGenericReservationList(generics.ListCreateAPIView):
+    queryset = ReservationDetails.objects.all()
+    serializer_class = ReservationSerializer
+
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['hotel_name']
+

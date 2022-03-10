@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'ReservationApp',
+    'sequences.apps.SequencesConfig',
 ]
 
 MIDDLEWARE = [
@@ -82,8 +84,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ra_james',
-        'HOST': '127.0.0.1',
-        'PORT': '8001',
+        'HOST': 'dev.cs.smu.ca',
+        # 'PORT': '8001',
         'USER': 'ra_james',
         'PASSWORD': 'A00455851!cda'
     }
