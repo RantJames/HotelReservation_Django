@@ -1,3 +1,4 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 
@@ -5,7 +6,13 @@ from django.utils import timezone
 
 
 class HotelList(models.Model):
-    name = models.CharField(max_length=200, primary_key=True)
+    name = models.CharField(max_length=200, primary_key=True, validators=[
+            RegexValidator(
+            regex='^[a-zA-Z0-9]*$',
+            message='Hotel Name must be Alphanumeric',
+            code='invalid_hotel_name'
+             ),
+            ])
     address = models.CharField(max_length=500)
     price = models.IntegerField()
     last_updated = models.DateTimeField(default=timezone.now)
@@ -36,8 +43,20 @@ class ReservationDetails(models.Model):
 
 class GuestList(models.Model):
     res = models.ForeignKey(ReservationDetails, on_delete=models.CASCADE, related_name="guestInReservation")
-    first_name = models.CharField(max_length=200)
-    last_name = models.CharField(max_length=200)
+    first_name = models.CharField(max_length=200, validators=[
+                RegexValidator(
+                    regex='^[a-zA-Z]*$',
+                    message='First Name must be Alphabets',
+                    code='invalid_first_name'
+                ),
+            ])
+    last_name = models.CharField(max_length=200, validators=[
+                RegexValidator(
+                    regex='^[a-zA-Z]*$',
+                    message='Last Name must be Alphabets',
+                    code='invalid_last_name'
+                ),
+            ])
     address = models.CharField(max_length=500)
     gender = models.CharField(max_length=1)
     age = models.IntegerField()

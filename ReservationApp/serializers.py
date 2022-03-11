@@ -2,6 +2,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 
 from .models import HotelList, ReservationDetails, GuestList
+from django.core.exceptions import ValidationError
 
 
 class HotelSerializer(serializers.ModelSerializer):
@@ -24,15 +25,6 @@ class ReservationSerializer(serializers.ModelSerializer):
         model = ReservationDetails
         fields = ['hotel_name', 'confirmation_num', 'checkin_date', 'checkout_date', 'guestInReservation']
 
-    # def create(self, validated_data):
-    #     guests_data = validated_data.pop('guestInReservation')
-    #     reser = ReservationDetails.objects.create(**validated_data)
-    #     # print(type(reser))
-    #     print(guests_data)
-    #     for guest_data in guests_data:
-    #         GuestList.objects.create(res=reser, **guest_data)
-    #     return reser
-
     def create(self, validated_data):
         guest_validated_data = validated_data.pop('guestInReservation')
         reserve = ReservationDetails.objects.create(**validated_data)
@@ -41,3 +33,8 @@ class ReservationSerializer(serializers.ModelSerializer):
             each['res'] = reserve
         guest_set_serializer.create(guest_validated_data)
         return reserve
+
+    # def date_validate(self, validated_data):
+    #     if validated_data['checkin_date'] > validated_data['checkout_date']:
+    #         raise ValidationError("Checkin date should be less than checkout date")
+    #     return validated_data
