@@ -1,33 +1,33 @@
 # HotelReservation_Django
 Hotel Reservation API on Django
 
-#Steps to run application
+# Steps to run application
 
-#clone project
+# clone project
 git clone https://github.com/RantJames/HotelReservation_Django.git
 
-#Install Dependencies
+# Install Dependencies
 pip install -r requirements.txt
 
-#Update Database details in DjangoProject\classDemo\settings.py
+# Update Database details in DjangoProject\classDemo\settings.py
 'default': { 'ENGINE': 'django.db.backends.mysql', 'NAME': '<database_name>, 'HOST': , 'PORT': <database_port>, 'USER': , 'PASSWORD': }
 
-#To perform migrations
+# To perform migrations
 python manage.py makemigrations python manage.py migrate
 
-#Run application
+# Run application
 python manage.py runserver
 
-#Application Url to display Hotel list
+# Application Url to display Hotel list
 http://127.0.0.1:8000/hotelList/
 
-#Application Url to display Reservation list
+# Application Url to display Reservation list
 http://127.0.0.1:8000/resList/
 
-#Application Url to perform GET and POST on Hotel list
+# Application Url to perform GET and POST on Hotel list
 http://127.0.0.1:8000/HotelGenList/
 
-#Json request body for POST
+# Json request body for POST
 {
         "name": "Hilton Inn",
         "address": "Halifax",
@@ -35,10 +35,10 @@ http://127.0.0.1:8000/HotelGenList/
         "rooms_available": 50
  }
 
-#Application Url to perform GET and POST on Reservation list
+# Application Url to perform GET and POST on Reservation list
 http://127.0.0.1:8000/ResGenList/
 
-#Json request body for POST
+# Json request body for POST
 {
         "hotel_name": "Hilton Inn",
         "confirmation_num": 1000,
@@ -69,6 +69,8 @@ http://127.0.0.1:8000/ResGenList/
         ]
     }
     
- #Url parameters to perform GET and display hotel availability
- http://127.0.0.1:8000/ResGenList/?address=Halifax&checkin_date=2022-03-11&checkout_date=2022-03-10
- 
+# Url parameters to perform GET and display hotel availability
+http://127.0.0.1:8000/ResGenList/?address=Halifax&checkin_date=2022-03-11&checkout_date=2022-03-10
+
+#Screenshots in folder
+HotelReservation_Django/Resources/Screenshots/
