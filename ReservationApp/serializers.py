@@ -1,14 +1,14 @@
 from rest_framework import serializers, status
 from rest_framework.response import Response
+import datetime
 
 from .models import HotelList, ReservationDetails, GuestList
-from django.core.exceptions import ValidationError
-
+from rest_framework.serializers import ValidationError
 
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = HotelList
-        fields = ['name', 'address', 'price']
+        fields = ['name', 'address', 'price', 'rooms_available']
 
 
 class GuestSerializer(serializers.ModelSerializer):
@@ -34,7 +34,10 @@ class ReservationSerializer(serializers.ModelSerializer):
         guest_set_serializer.create(guest_validated_data)
         return reserve
 
-    # def date_validate(self, validated_data):
-    #     if validated_data['checkin_date'] > validated_data['checkout_date']:
-    #         raise ValidationError("Checkin date should be less than checkout date")
-    #     return validated_data
+    def validate(self, validated_data):
+        if validated_data['checkin_date'] < datetime.date.today():
+            raise ValidationError("The date cannot be less than present date")
+
+        if validated_data['checkin_date'] > validated_data['checkout_date']:
+            raise ValidationError("Checkin date cannot be greater than checkout date")
+        return validated_data

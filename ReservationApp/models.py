@@ -2,20 +2,23 @@ from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 
+
+
 # Create your models here.
 
 
 class HotelList(models.Model):
     name = models.CharField(max_length=200, primary_key=True, validators=[
-            RegexValidator(
-            regex='^[a-zA-Z0-9]*$',
-            message='Hotel Name must be Alphanumeric',
-            code='invalid_hotel_name'
-             ),
-            ])
+            RegexValidator(regex='^[a-zA-Z0-9]*$',
+                           message='Hotel Name must be Alphanumeric',
+                            code='invalid_hotel_name'
+                        ),
+                        ])
     address = models.CharField(max_length=500)
     price = models.IntegerField()
     last_updated = models.DateTimeField(default=timezone.now)
+    rooms_available = models.IntegerField()
+
 
     def __str__(self):
         return self.name
