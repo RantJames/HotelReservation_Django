@@ -72,5 +72,5 @@ http://127.0.0.1:8000/ResGenList/
 # Url parameters to perform GET and display hotel availability
 http://127.0.0.1:8000/ResGenList/?address=Halifax&checkin_date=2022-03-11&checkout_date=2022-03-10
 
-#Screenshots in folder
+# Screenshots in folder
 HotelReservation_Django/Resources/Screenshots/
