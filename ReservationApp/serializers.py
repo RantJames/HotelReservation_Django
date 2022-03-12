@@ -5,6 +5,7 @@ import datetime
 from .models import HotelList, ReservationDetails, GuestList
 from rest_framework.serializers import ValidationError
 
+
 class HotelSerializer(serializers.ModelSerializer):
     class Meta:
         model = HotelList
